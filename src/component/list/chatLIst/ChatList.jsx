@@ -16,7 +16,27 @@ const ChatList =() => {
                 onClick={()=> setAddMode((prev)=>!prev)}
                 />
             </div>
-            {/* 27.30 */}
+            <div className="item">
+                <img src="./avatar.png" alt="" />
+                <div className="text">
+                    <span>Sam Star</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+            <div className="item">
+                <img src="./avatar.png" alt="" />
+                <div className="text">
+                    <span>Sam Star</span>
+                    <p>Hello</p>
+                </div>
+            </div>
+            <div className="item">
+                <img src="./avatar.png" alt="" />
+                <div className="texts">
+                    <span>Sam Star</span>
+                    <p>Hello</p>
+                </div>
+            </div>
         </div>
     )
 }
