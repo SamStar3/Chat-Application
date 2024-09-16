@@ -29,7 +29,40 @@ console.log(text)
                     <img src="./info.png" alt="" />
                 </div>
             </div>
-            <div className="center"></div>
+            <div className="center">
+                <div className="message">
+                    <img src="./avatar.png" alt="" />
+                    <div className="texts">
+                        <p>Lorem ipsum doloelit. Maiores sunt 
+                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
+                        <span>1 min ago</span>
+                    </div>
+                </div>
+                <div className="message own">
+                    <div className="texts">
+                        <img src="https://www.google.com/search?q=image&sca_esv=8c3f90bc5e947fd3&sca_upv=1&rlz=1C1UEAD_enIN1102IN1103&sxsrf=ADLYWIKCpe_IIY3451hRz-XpCFZ7aeRCHg:1726483837082&udm=2&source=iu&ictx=1&vet=1&fir=Q53WJiavu6IJtM%252C0JWe7yDOKrVFAM%252C%252Fm%252F0jg24%253BtYmxDgFq4MrkJM%252C-t22bY2ix3gHaM%252C_%253BsKMM4eBjWSQEBM%252CB51x0PBR9KNzvM%252C_%253B2brKLR3s5kTpPM%252CExDvm63D_wCvSM%252C_%253B5RFroDSkyf1y6M%252CYAe2I9AqIHgndM%252C_&usg=AI4_-kRmEeoXPibEaVcHVEiWnr5hnUnfig&sa=X&ved=2ahUKEwjsj8e-pceIAxV8zzgGHaHTJ9kQ_B16BAgtEAE#vhid=Q53WJiavu6IJtM&vssid=mosaic&vwlns=WyIwQ0JVUWg2Y0dhaGNLRXdpUXlZckNwY2VJQXhVQUFBQUFIUUFBQUFBUUJBIl0=&lns=W251bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsIkVrY0tKREExWlROaE5URTNMVEUzTVdVdE5EYzJPQzA0WWpsaExUaGlaVFUyTldJME1UQTVZeElmYXpob1FuZHFibkpCVWpSbGMwWldkMUYzZG5veE4wVlhSV3MyYmtoNGF3PT0iLG51bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLG51bGwsWyI1YTI3NDQwNC03MjJiLTQxOTEtOWRjZi1iMDEzYmQyYWZmZTYiXV0=" alt="" />
+                        <p>Lorem ipsum doloelit. Maiores sunt 
+                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
+                        <span>1 min ago</span>
+
+                    </div>
+                </div>
+                <div className="message">
+                    <img src="./avatar.png" alt="" />
+                    <div className="texts">
+                        <p>Lorem ipsum doloelit. Maiores sunt 
+                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
+                        <span>1 min ago</span>
+                    </div>
+                </div>
+                <div className="message own">
+                    <div className="texts">
+                        <p>Lorem ipsum doloelit. Maiores sunt 
+                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
+                        <span>1 min ago</span>
+                    </div>
+                </div>
+            </div>
             <div className="bottom">
                 <div className="icons">
                     <img src="./img.png" alt="" />
