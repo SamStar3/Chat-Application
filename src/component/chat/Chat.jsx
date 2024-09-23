@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState , useRef} from "react";
 import "./chat.css"
 import EmojiPicker from "emoji-picker-react";
 
@@ -88,7 +88,7 @@ console.log(text)
                 <button className="sendButton">Send</button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Chat 
+export default Chat ;
