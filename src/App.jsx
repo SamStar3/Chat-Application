@@ -4,6 +4,7 @@ import List from "./component/list/List"
 
 const App = () => {
   return (
+
     <div className='container'>
       <List/>
       <Chat/>
