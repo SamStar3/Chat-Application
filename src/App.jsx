@@ -3,12 +3,21 @@ import Detail from "./component/detail/Detail";
 import List from "./component/list/List"
 
 const App = () => {
+
+  const user = false 
+
   return (
 
     <div className='container'>
-      <List/>
-      <Chat/>
-      <Detail/>
+      {
+        user ? (
+          <>
+          <List/>
+          <Chat/>
+          <Detail/>
+          </>
+        ) : (<Login/>)
+      }
     </div>
   )
 }
