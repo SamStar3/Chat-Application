@@ -37,10 +37,11 @@ const ChatList =() => {
                     <p>Hello</p>
                 </div>
             </div>
+            <AddUser/>  
         </div>
-    )
-}
+    );
+};
 
-export default ChatList 
+export default ChatList ;
 
 
