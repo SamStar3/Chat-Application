@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import {auth, db } from "../../lib/firebase";
+import upload from "../../lib/upload";
 
 const Login = () => {
 
@@ -31,9 +32,12 @@ const Login = () => {
 
             const res = await createUserWithEmailAndPassword(auth, email, password)
 
+            const imgUrl = await upload(avatar.file)
+
             await setDoc(doc(db, "user", res.user.uid), {
                 username,
                 email,
+                avatar: imgUrl,
                 id: res.user.uid,
                 blocked: [],
             });
@@ -84,3 +88,5 @@ const Login = () => {
 };
 
 export default Login;
+
+//1.44
