@@ -7,20 +7,19 @@ import {auth, db } from "../../lib/firebase";
 import upload from "../../lib/upload";
 
 const Login = () => {
+    const [avatar, setAvatar] = useState({
+        file: null,
+        url: ""
+    });
 
-    const [avatar,setAvatar] = useState({
-        file:null,
-        url:""
-    })
-
-    const handleAvatar = e => {
-        if(e.target.files[0]) {
+    const handleAvatar = (e) => {
+        if (e.target.files[0]) {
             setAvatar({
-                file:e.target.file[0],
+                file: e.target.files[0],  // Corrected this line
                 url: URL.createObjectURL(e.target.files[0])
-            })
+            });
         }
-    }
+    };
 
     const handleRegister = async e => {
         e.preventDefault()
@@ -64,27 +63,28 @@ const Login = () => {
             <div className="item">
                 <h2>Welcome back,</h2>
                 <form onSubmit={handleLogin}>
-                    <input type="text" placeholder="Email" name="email"/>
-                    <input type="password" placeholder="Password" name="password"/>
+                    <input type="text" placeholder="Email" name="email" />
+                    <input type="password" placeholder="Password" name="password" />
                     <button>Sign In</button>
                 </form>
             </div>
             <div className="separator"></div>
             <div className="item">
-            <h2>Create an Account</h2>
+                <h2>Create an Account</h2>
                 <form onSubmit={handleRegister}>
                     <label htmlFor="file">
-                        <img src={avatar.url || "./avatar.png"} alt="" />
-                        Upload an image</label>
-                    <input type="file" id="file" style={{display:"none"}} onChange={handleAvatar}/>
-                    <input type="text" placeholder="Username" name="username"/>
-                    <input type="text" placeholder="Email" name="email"/>
-                    <input type="password" placeholder="Password" name="password"/>
+                        <img src={avatar.url || "./avatar.png"} alt="avatar" />
+                        Upload an image
+                    </label>
+                    <input type="file" id="file" style={{ display: "none" }} onChange={handleAvatar} />
+                    <input type="text" placeholder="Username" name="username" />
+                    <input type="text" placeholder="Email" name="email" />
+                    <input type="password" placeholder="Password" name="password" />
                     <button>Sign Up</button>
                 </form>
             </div>
         </div>
-    )
+    );
 };
 
 export default Login;
