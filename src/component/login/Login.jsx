@@ -15,7 +15,7 @@ const Login = () => {
     const handleAvatar = (e) => {
         if (e.target.files[0]) {
             setAvatar({
-                file: e.target.files[0],  // Corrected this line
+                file: e.target.files[0], 
                 url: URL.createObjectURL(e.target.files[0])
             });
         }

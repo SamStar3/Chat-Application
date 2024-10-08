@@ -1,11 +1,11 @@
-import { getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL,date, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase";
 
 const upload = async (file) => {
-    const data = new Date()
+    const data = new Date().getTime(); 
 
     // const storage = getStorage();
-const storageRef = ref(storage, `images/${date + file.name}`);
+    const storageRef = ref(storage, `images/${date}_${file.name}`);
 
 const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -27,4 +27,4 @@ uploadTask.on('state_changed',
 );
 });
 };
-export default upload
+export default upload;
