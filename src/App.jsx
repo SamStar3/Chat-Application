@@ -10,23 +10,27 @@ import { auth } from "./lib/firebase"; // Import 'auth' from your Firebase confi
 
 const App = () => {
 
-  const [user, setUser] = useState(null); // Manage user state dynamically
+  const [currentUser, isLoading, fetchUserInfo] = useUserState(null); // Manage user state dynamically
 
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
-      console.log(user);
+      fetchUserInfo(user.uid);
       setUser(user); // Update the user state when authentication state changes
     });
 
     return () => {
       unSub();
     };
-  }, []);
+  }, [fetchUserInfo]);
+
+  console.log(currentUser);
+
+  if(isLoading) return <div className="loading">Loading...</div>
 
   return (
     <div className='container'>
       {
-        user ? (
+        currentUser ? (
           <>
             <List user = {user}/>
             <Chat user = {user}/>
