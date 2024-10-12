@@ -2,7 +2,9 @@ import ChatList from "./chatLIst/ChatList"
 import "./list.css"
 import Userinfo from "./userInfo/UserInfo"
 
-const List =() => {
+const List =(user) => {
+    console.log(user);
+    
     return (
         <div className="list">
             <Userinfo/>

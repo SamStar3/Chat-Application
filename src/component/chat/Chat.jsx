@@ -2,7 +2,9 @@ import { useEffect, useState , useRef} from "react";
 import "./chat.css"
 import EmojiPicker from "emoji-picker-react";
 
-const Chat =() => {
+const Chat =(user) => {
+    console.log(user);
+    
 const [open,setOpen] = useState(false);
 const [text, setText] = useState("");
 
