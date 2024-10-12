@@ -3,6 +3,7 @@ import "./chat.css"
 import EmojiPicker from "emoji-picker-react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../lib/firebase";
+import { useChatStore } from "../../lib/chatStore";
 
 const Chat =(user) => {
     console.log(user);
@@ -10,6 +11,8 @@ const Chat =(user) => {
 const [chat, setChat] = useState();
 const [open,setOpen] = useState(false);
 const [text, setText] = useState("");
+
+const { chatId } = useChatStore();
 
 const endRef = useRef(null)
 
@@ -25,7 +28,7 @@ useEffect(() => {
     return () =>{
         unSub();
     };
-},[]);
+},[chatId]);
 
 const handleEmoji = e => {
     setText((prev) =>prev + e.emoji);
@@ -51,38 +54,18 @@ console.log(text)
                 </div>
             </div>
             <div className="center">
-                <div className="message">
-                    <img src="./avatar.png" alt="" />
-                    <div className="texts">
-                        <p>Lorem ipsum doloelit. Maiores sunt 
-                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
-                        <span>1 min ago</span>
-                    </div>
-                </div>
-                <div className="message own">
-                    <div className="texts">
-                        <img src="https://images.pexels.com/photos/7381200/pexels-photo-7381200.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load" alt="" />
-                        <p>Lorem ipsum doloelit. Maiores sunt 
-                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
-                        <span>1 min ago</span>
-
-                    </div>
-                </div>
-                <div className="message">
-                    <img src="./avatar.png" alt="" />
-                    <div className="texts">
-                        <p>Lorem ipsum doloelit. Maiores sunt 
-                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
-                        <span>1 min ago</span>
-                    </div>
-                </div>
-                <div className="message own">
-                    <div className="texts">
-                        <p>Lorem ipsum doloelit. Maiores sunt 
-                            ipsum tempora ipsam dicta iure temporibus, beatae autem perferendis velit itaque.</p>
-                        <span>1 min ago</span>
-                    </div>
-                </div>
+                {chat.message.map((message) => (
+                                    <div className="message own" key={message?.createAt}>
+                                    <div className="texts">
+                                        {message.img && <img
+                                           src = {message.img}
+                                           alt=""
+                                        />}
+                                        <p>{message.text}</p>
+                                        {/* <span>{message}</span> */}
+                                    </div>
+                                </div>
+                ))}
                 <div ref={endRef}></div>
             </div>
             <div className="bottom">
