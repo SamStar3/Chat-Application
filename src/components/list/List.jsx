@@ -2,14 +2,13 @@ import ChatList from "./chatLIst/ChatList"
 import "./list.css"
 import Userinfo from "./userInfo/UserInfo"
 
-const List =(user) => {
-    console.log(user);
+const List =() => {
     
     return (
         <div className="list">
             <Userinfo/>
             <ChatList/>
-            </div>
+        </div>
     )
 }
 
