@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import BrowserRouter, Route, and Routes
 import Chat from "./components/chat/Chat";
 import Detail from "./components/detail/Detail";
 import List from "./components/list/List";
@@ -8,6 +9,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase";
 import { useUserStore } from "./lib/userStore";
 import { useChatStore } from "./lib/chatStore";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const App = () => {
   const { currentUser, isLoading, fetchUserInfo } = useUserStore();
@@ -15,37 +17,33 @@ const App = () => {
 
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
-      // if (user) {
-      //   fetchUserInfo(user.uid); // Fetch user information when user is authenticated
-      // } else {
-      //   fetchUserInfo(null); // Clear user data if no user is logged in
-      // }
       fetchUserInfo(user?.uid);
     });
 
     return () => {
-      unSub(); 
+      unSub();
     };
   }, [fetchUserInfo]);
 
-  if (isLoading) return <div className="loading">Loading...</div>;
-  
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <ClipLoader color={"#123abc"} loading={isLoading} size={150} />
+      </div>
+    );
+  }
 
   return (
-    <div className="container">
-      {currentUser ? (
-        <>
-          <List /> 
-          {chatId && <Chat /> }
-          {chatId && <Detail /> }
-        </>
-      ) : (
-        <>
-        <Login />
-        </>
-      )}
-      <Notification />
-    </div>
+    <Router>
+      <div className="container">
+        <Routes>
+          <Route path="/" element={currentUser ? <List /> : <Login />} />
+          <Route path="/chat" element={currentUser ? <Chat /> : <Login />} />
+          <Route path="/detail" element={currentUser ? <Detail /> : <Login />} />
+        </Routes>
+        <Notification />
+      </div>
+    </Router>
   );
 };
 

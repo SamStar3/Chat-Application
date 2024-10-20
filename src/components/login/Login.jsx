@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./login.css";
 import { toast } from "react-toastify";
 import {
@@ -6,7 +7,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "../../lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, collection, query, where, getDocs } from "firebase/firestore";
 import upload from "../../lib/upload";
 
 const Login = () => {
@@ -14,8 +15,8 @@ const Login = () => {
     file: null,
     url: "",
   });
-
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleAvatar = (e) => {
     if (e.target.files[0]) {
@@ -33,13 +34,11 @@ const Login = () => {
 
     const { username, email, password } = Object.fromEntries(formData);
 
-    // VALIDATE INPUTS
     if (!username || !email || !password)
       return toast.warn("Please enter inputs!");
     if (!avatar.file) return toast.warn("Please upload an avatar!");
 
-    // VALIDATE UNIQUE USERNAME
-    const usersRef = collection(db, "users");
+    const usersRef = collection(db, "user");
     const q = query(usersRef, where("username", "==", username));
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
@@ -48,10 +47,9 @@ const Login = () => {
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-
       const imgUrl = await upload(avatar.file);
 
-      await setDoc(doc(db, "users", res.user.uid), {
+      await setDoc(doc(db, "user", res.user.uid), {
         username,
         email,
         avatar: imgUrl,
@@ -81,6 +79,8 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Logged in successfully!");
+      navigate("/chat"); // Navigate to the chat page after successful login
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -94,8 +94,8 @@ const Login = () => {
       <div className="item">
         <h2>Welcome back,</h2>
         <form onSubmit={handleLogin}>
-          <input type="text" placeholder="Email" name="email" />
-          <input type="password" placeholder="Password" name="password" />
+          <input type="text" placeholder="Email" name="email" required />
+          <input type="password" placeholder="Password" name="password" required />
           <button disabled={loading}>{loading ? "Loading" : "Sign In"}</button>
         </form>
       </div>
@@ -113,9 +113,9 @@ const Login = () => {
             style={{ display: "none" }}
             onChange={handleAvatar}
           />
-          <input type="text" placeholder="Username" name="username" />
-          <input type="text" placeholder="Email" name="email" />
-          <input type="password" placeholder="Password" name="password" />
+          <input type="text" placeholder="Username" name="username" required />
+          <input type="text" placeholder="Email" name="email" required />
+          <input type="password" placeholder="Password" name="password" required />
           <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
         </form>
       </div>
@@ -124,5 +124,3 @@ const Login = () => {
 };
 
 export default Login;
-
-//1.24
