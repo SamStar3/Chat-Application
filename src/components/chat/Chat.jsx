@@ -30,10 +30,12 @@ const Chat = () => {
   const endRef = useRef(null);
 
   useEffect(() => {
+    console.log(chat)
     endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat.messages]);
+  }, [chatId]);
 
   useEffect(() => {
+    console.log(chatId)
     const unSub = onSnapshot(doc(db, "chats", chatId), (res) => {
       setChat(res.data());
     });
@@ -133,7 +135,7 @@ const Chat = () => {
             className={
               message.senderId === currentUser?.id ? "message own" : "message"
             }
-            key={message?.createAt}
+            key={message?.createdAt}
           >
             <div className="texts">
               {message.img && <img src={message.img} alt="" />}

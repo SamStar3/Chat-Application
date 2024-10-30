@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import BrowserRouter, Route, and Routes
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import BrowserRouter, Route, and Routes
 import Chat from "./components/chat/Chat";
 import Detail from "./components/detail/Detail";
 import List from "./components/list/List";
@@ -33,17 +33,21 @@ const App = () => {
     );
   }
 
+  //console.log(currentUser)
+
   return (
-    <Router>
-      <div className="container">
-        <Routes>
-          <Route path="/" element={currentUser ? <List /> : <Login />} />
-          <Route path="/chat" element={currentUser ? <Chat /> : <Login />} />
-          <Route path="/detail" element={currentUser ? <Detail /> : <Login />} />
-        </Routes>
-        <Notification />
-      </div>
-    </Router>
+    <div className="container">
+      {currentUser ? (
+        <>
+          <List />
+          {chatId && <Chat />}
+          {chatId && <Detail />}
+        </>
+      ) : (
+        <Login />
+      )}
+      <Notification />
+    </div>
   );
 };
 

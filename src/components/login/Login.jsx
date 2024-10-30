@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+//import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./login.css";
 import { toast } from "react-toastify";
 import {
@@ -16,7 +16,7 @@ const Login = () => {
     url: "",
   });
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  //const navigate = useNavigate(); // Initialize useNavigate
 
   const handleAvatar = (e) => {
     if (e.target.files[0]) {
@@ -38,7 +38,7 @@ const Login = () => {
       return toast.warn("Please enter inputs!");
     if (!avatar.file) return toast.warn("Please upload an avatar!");
 
-    const usersRef = collection(db, "user");
+    const usersRef = collection(db, "users");
     const q = query(usersRef, where("username", "==", username));
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
@@ -49,7 +49,7 @@ const Login = () => {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const imgUrl = await upload(avatar.file);
 
-      await setDoc(doc(db, "user", res.user.uid), {
+      await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
         avatar: imgUrl,
@@ -80,7 +80,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Logged in successfully!");
-      navigate("/chat"); // Navigate to the chat page after successful login
+      // navigate("/chat"); // Navigate to the chat page after successful login
     } catch (err) {
       console.log(err);
       toast.error(err.message);
